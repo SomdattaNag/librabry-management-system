@@ -50,13 +50,13 @@ class LibrarySystem {
         books.add(newBook);
     }
 
-    public String searchBook(int serialNumber) {
+    public String searchBookByTitle(String title) {
         for (Book book : books) {
-            if (book.getSerialNumber() == serialNumber) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
                 return book.toString();
             }
         }
-        return "Book not found with serial number: " + serialNumber;
+        return "Book not found with title: " + title;
     }
 
     public String deleteBook(int serialNumber) {
@@ -82,7 +82,7 @@ class LibrarySystem {
     }
 }
 
-public class LibraryManagementSystem{
+public class LibraryManagementSystem {
     private LibrarySystem librarySystem;
     private JFrame frame;
     private JTextArea displayArea;
@@ -199,8 +199,8 @@ public class LibraryManagementSystem{
 
         searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int serialNumber = Integer.parseInt(serialNumberField.getText());
-                String result = librarySystem.searchBook(serialNumber);
+                String title = titleField.getText(); // Get the book title from the title field
+                String result = librarySystem.searchBookByTitle(title);
                 displayArea.setText(result);
             }
         });
